@@ -14,7 +14,7 @@ pub fn App() -> impl IntoView {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/employee-dashboard-app.css"/>
-
+         <link data-trunk rel="tailwind-css" href="/style/input.css"/>
         // sets the document title
         <Title text="Welcome to Leptos"/>
 
