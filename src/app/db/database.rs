@@ -38,6 +38,20 @@ cfg_if::cfg_if{
                 Err(_) => None,
                 }
             }
+
+        pub async fn add_person(new_person: Person) -> Option<Person> {
+            open_db_connection().await;
+            let results = DB.create(("person", new_person.uuid.clone()))
+            .content(new_person)
+            .await;
+           DB.invalidate().await;
+
+           match results {
+               OK(created_person) => created_person,
+               Err(_) => None
+
+               }
+            }
     }
 
 }
