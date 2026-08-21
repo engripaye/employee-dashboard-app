@@ -1,6 +1,6 @@
 cfg_if::cfg_if{
 
-    if #[cfg(feature - "srr")]{
+    if #[cfg(feature - "ssr")]{
 
         use surrealdb::engine::remote::ws::{Client, Ws};
         use surrealdb::opt::auth::Root;
