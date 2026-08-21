@@ -16,5 +16,17 @@ pub struct Person {
     pub joined_date: String,
     }
 
-    impl_person {
+    impl Person {
+        pub fn new(uuid: String, name: String, title: String, level: String, compensation: i32, joined_date: String) -> Person {
+
+            Person {
+                      uuid,
+                      name,
+                      title,
+                      level,
+                      compensation          ,
+                      joined_date,
+                  }
+            }
+
         }
