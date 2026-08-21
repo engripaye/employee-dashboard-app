@@ -1,5 +1,5 @@
 pub mob db;
-
+pub mod models;
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, Stylesheet, Title};
 use leptos_router::{
