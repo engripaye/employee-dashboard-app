@@ -19,7 +19,9 @@ cfg_if::cfg_if!{
 
             let get_all_persons_result = database::get_all_persons().await;
             match get_all_persons_result{
-                Some(found_persons)
+                Some(found_persons) => found_persons,
+                None => Vec::new()
+
                 }
             }
         }
