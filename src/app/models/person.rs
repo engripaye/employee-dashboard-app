@@ -1,9 +1,8 @@
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-#[derive(Debug, Validate, Deserialize, Serialize, Eq, Clone)]
+#[derive(Debug, Validate, Deserialize, Serialize, PartialEq, Eq, Clone)]
 pub struct Person {
-
     pub uuid: String,
     #[validate(length(min = 1, message = "name is required"))]
     pub name: String,
