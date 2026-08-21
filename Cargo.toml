@@ -31,6 +31,7 @@ thiserror = "2.0.20"
 csr = ["leptos/csr"]
 hydrate = ["leptos/hydrate"]
 ssr = [
+  "dep:surrealdb",
   "dep:actix-files",
   "dep:actix-web",
   "dep:leptos_actix",
