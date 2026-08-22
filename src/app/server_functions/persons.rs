@@ -11,7 +11,7 @@ pub async fn get_persons() -> Result<Vec<Person>, ServerFnError>{
 
 #[server(AddPerson, "/api")]
 pub async fn add_person(
-    add_person_request:: AddPersonRequest,
+    add_person_request::AddPersonRequest,
     ) -> Result<Person, ServerFnError>{
 
         let new_person = add_new_person(
@@ -50,7 +50,7 @@ cfg_if::cfg_if!{
         pub async fn add_new_person<T>(name: T, title: T, level: T, compensation:i32)
         -> Option<Person> where T: Into<String> {
 
-            let mud buffer = Uuid::encode_buffer();
+            let mut buffer = Uuid::encode_buffer();
             let uuid = Uuid::new_v4().simple().encode_lower(&mut buffer);
 
             // getting the current timestamp
