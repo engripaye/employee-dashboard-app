@@ -10,5 +10,6 @@ pub fn HomePage() -> impl IntoView{
         "Home Page here"
         </div>
         </body>
+
         }
     }
