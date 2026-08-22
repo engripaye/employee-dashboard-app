@@ -1,4 +1,4 @@
-use crate::app::models::person::Person;
+use crate::app::models::{person::Person, AddPersonRequest};
 use leptos::*;
 use serde::*;
 
@@ -8,6 +8,26 @@ pub async fn get_persons() -> Result<Vec<Person>, ServerFnError>{
     let persons = retrieve_all_persons().await;
     Ok(persons)
     }
+
+#[server(AddPerson, "/api")]
+pub async fn add_person(
+    add_person_request:: AddPersonRequest,
+    ) -> Result<Person, ServerFnError>{
+
+        let new_person = add_new_person(
+            add_person_request.name,
+            add_person_request.title,
+            add_person_request.level,
+            add_person_request.compensation
+            ).await;
+
+            match new_person{
+                some(created_person) => Ok(created_person),
+                None => Err(ServerFnError::Args(String::from(
+                    "Error in creating person!"
+                    ))),
+                }
+        }
 
 cfg_if::cfg_if!{
 
