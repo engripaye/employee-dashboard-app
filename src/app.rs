@@ -1,6 +1,8 @@
-pub mob db;
+pub mod db;
 pub mod models;
 pub mod server_functions;
+pub mod pages;
+use pages::{HomePage, TeamPage};
 
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, Stylesheet, Title};
@@ -19,15 +21,25 @@ pub fn App() -> impl IntoView {
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/employee-dashboard-app.css"/>
          <link data-trunk rel="tailwind-css" href="/style/input.css"/>
+
         // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="Full-Stack Dashboard App"/>
 
         // content for this welcome page
         <Router>
             <main>
-                <Routes fallback=move || "Not found.">
-                    <Route path=StaticSegment("") view=HomePage/>
-                    <Route path=WildcardSegment("any") view=NotFound/>
+            <Routes>
+                    <Route path="/" view=move || {
+                        view! {
+                            <HomePage />
+                            }
+                        }/>
+                    <Route path="/team" view=move || {
+                        view! {
+                            <TeamPage />
+                            }
+                        }/>
+                        <Route path="/*any" view=NotFound />
                 </Routes>
             </main>
         </Router>
