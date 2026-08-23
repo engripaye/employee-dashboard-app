@@ -1,17 +1,7 @@
 use serde::{Deserialize, Serialize};
-use surrealdb::SurrealValue;
 use validator::Validate;
 
-#[derive(
-    Debug,
-    Validate,
-    Deserialize,
-    Serialize,
-    SurrealValue,
-    PartialEq,
-    Eq,
-    Clone,
-)]
+#[derive(Debug, Validate, Deserialize, Serialize, PartialEq, Eq, Clone)]
 pub struct Person {
     pub uuid: String,
 
@@ -50,16 +40,7 @@ impl Person {
     }
 }
 
-#[derive(
-    Debug,
-    Validate,
-    Deserialize,
-    Serialize,
-    SurrealValue,
-    PartialEq,
-    Eq,
-    Clone,
-)]
+#[derive(Debug, Validate, Deserialize, Serialize, PartialEq, Eq, Clone)]
 pub struct AddPersonRequest {
     #[validate(length(min = 1, message = "name is required"))]
     pub name: String,
