@@ -11,7 +11,7 @@ pub async fn get_persons() -> Result<Vec<Person>, ServerFnError>{
 
 #[server(AddPerson, "/api")]
 pub async fn add_person(
-    add_person_request::AddPersonRequest,
+    new_person: add_person_request::AddPersonRequest,
     ) -> Result<Person, ServerFnError>{
 
         let new_person = add_new_person(
