@@ -50,7 +50,7 @@ pub struct AddPersonRequest{
 
 impl AddPersonRequest {
 
-    pb fn new(name: String, title: String, level: String, compensation: i32) ->
+    pub fn new(name: String, title: String, level: String, compensation: i32) ->
     AddPersonRequest{
 
         AddPersonRequest{
