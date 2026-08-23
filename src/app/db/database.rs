@@ -1,7 +1,7 @@
 cfg_if::cfg_if! {
 
     if #[cfg(feature = "ssr")]{
-        use create::app::models::Person;
+        use crate::app::models::Person;
         use surrealdb::engine::remote::ws::{Client, Ws};
         use surrealdb::opt::auth::Root;
         use surrealdb::{Error, Surreal};
