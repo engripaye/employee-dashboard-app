@@ -2,13 +2,14 @@ pub mod db;
 pub mod models;
 pub mod server_functions;
 pub mod pages;
-use pages::{HomePage, TeamPage};
+
+use pages::HomePage;
 
 use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, Stylesheet, Title};
 use leptos_router::{
     components::{Route, Router, Routes},
-    StaticSegment, WildcardSegment,
+    path,
 };
 
 #[component]
@@ -17,61 +18,42 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        // injects a stylesheet into the document <head>
-        // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/employee-dashboard-app.css"/>
-         <link data-trunk rel="tailwind-css" href="/style/input.css"/>
+        // Injects a stylesheet into the document <head>
+        <Stylesheet
+            id="leptos"
+            href="/pkg/employee-dashboard-app.css"
+        />
 
-        // sets the document title
+        <link
+            data-trunk
+            rel="tailwind-css"
+            href="/style/input.css"
+        />
+
+        // Sets the document title
         <Title text="Full-Stack Dashboard App"/>
 
-        // content for this welcome page
         <Router>
             <main>
-            <Routes>
-                    <Route path="/" view=move || {
-                        view! {
-                            <HomePage />
-                            }
-                        }/>
-                    <Route path="/team" view=move || {
-                        view! {
-                            <TeamPage />
-                            }
-                        }/>
-                        <Route path="/*any" view=NotFound />
+                <Routes fallback=|| view! {
+                    <NotFound />
+                }>
+                    <Route
+                        path=path!("/")
+                        view=HomePage
+                    />
                 </Routes>
             </main>
         </Router>
     }
 }
 
-/// Renders the home page of your application.
-#[component]
-fn HomePage() -> impl IntoView {
-    // Creates a reactive value to update the button
-    let count = RwSignal::new(0);
-    let on_click = move |_| *count.write() += 1;
-
-    view! {
-        <h1>"Welcome to Leptos!"</h1>
-        <button class="bg-red-500 rounded text-white px-2 py-2" on:click=on_click>"Click Me: " {count}</button>
-    }
-}
-
 /// 404 - Not Found
 #[component]
 fn NotFound() -> impl IntoView {
-    // set an HTTP status code 404
-    // this is feature gated because it can only be done during
-    // initial server-side rendering
-    // if you navigate to the 404 page subsequently, the status
-    // code will not be set because there is not a new HTTP request
-    // to the server
+    // Set an HTTP status code 404
     #[cfg(feature = "ssr")]
     {
-        // this can be done inline because it's synchronous
-        // if it were async, we'd use a server function
         let resp = expect_context::<leptos_actix::ResponseOptions>();
         resp.set_status(actix_web::http::StatusCode::NOT_FOUND);
     }
