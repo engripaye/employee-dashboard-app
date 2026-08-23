@@ -55,7 +55,7 @@ cfg_if::cfg_if!{
 
             // getting the current timestamp
             let current_now = Local::now();
-            let current_formatted = current_now.to_String();
+            let current_formatted = current_now.to_string();
 
             let new_person = Person::new(
                 String::from(uuid),
