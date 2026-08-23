@@ -1,4 +1,4 @@
-cfg_if::cfg_if{
+cfg_if::cfg_if! {
 
     if #[cfg(feature - "ssr")]{
         use create::app::models::Person;
